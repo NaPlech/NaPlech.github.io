@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kavárna NaPlech</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Georgia", serif;
+            background: #fff;
+            color: #111;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: url('kava_web.png') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 28px;
+        }
+
+        /* MENU BUTTON */
+        .menu-button {
+            position: absolute;
+            right: 40px;
+            top: 40px;
+            z-index: 3;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            user-select: none;
+        }
+
+        /* MENU */
+        .menu {
+            position: absolute;
+            top: 120px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+            transition: 0.3s;
+            z-index: 4;
+        }
+
+        .menu a {
+            text-decoration: none;
+            background: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 18px;
+            color: black;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .menu.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* INTRO */
+        .intro {
+            background: black;
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .intro-text {
+            max-width: 450px;
+            font-size: 22px;
+            line-height: 1.6;
+        }
+
+        .intro-logo img {
+            width: 250px;
+        }
+
+        /* GENERAL SECTIONS */
+        .section {
+            padding: 80px 40px;
+        }
+
+        .section.dark {
+            background: #111;
+            color: white;
+        }
+
+        .section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* FORM */
+        form {
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, textarea, select {
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 14px;
+            font-size: 20px;
+            border: none;
+            background: black;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .intro {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .intro-logo img {
+                margin-top: 30px;
+                width: 200px;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <h1>Kavárna NaPlech</h1>
+        <p>nejen kavárna</p>
+    </div>
+
+    <div class="menu-button" id="menuToggle">
+        <span class="icon">&#9776;</span>
+        <span>Menu</span>
+    </div>
+
+    <nav class="menu" id="menu">
+        <a href="#kontakt">Kontakt</a>
+        <a href="#doba">Otevírací doba</a>
+        <a href="#nabizime">Co nabízíme</a>
+        <a href="#rezervace">Rezervace</a>
+        <a href="#onas">O nás</a>
+    </nav>
+</header>
+
+<section class="intro">
+    <div class="intro-text">
+        <p>
+            Přijďte si k nám vychutnat kávu, užít si příjemný čas s ostatními 
+            a vytvořit si svůj vlastní plecháček – vzpomínku pro sebe nebo 
+            milý dárek pro někoho blízkého.
+        </p>
+    </div>
+
+    <div class="intro-logo">
+        <img src="naplech.png" alt="NaPlech logo">
+    </div>
+</section>
+
+<!-- CO NABÍZÍME -->
+<section id="nabizime" class="section">
+    <h2>Co nabízíme</h2>
+    <p>
+        Naší výsadou je možnost malování na plecháčky, kde si můžete vytvořit jedinečnou
+        památku na společně strávený čas. Nechybí samozřejmě ani velká nabídka kávy a
+        výběr rostlinných mlék. K tomu si můžete dopřát také výborný zákusek.
+    </p>
+</section>
+
+<!-- REZERVACE -->
+<section id="rezervace" class="section dark">
+    <h2>Rezervace</h2>
+
+  <form target="_blank" action="https://formsubmit.co/jakubreznik1@seznam.cz" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="Nová rezervace z webu NaPlech">
+
+        <input type="text" name="name" placeholder="Jméno a příjmení" required>
+        <input type="email" name="email" placeholder="E-mail" required>
+        <input type="tel" name="telefon" placeholder="Telefon" required>
+        <input type="date" name="datum" required>
+        <input type="time" name="cas" required>
+
+        <select name="osoby" required>
+            <option value="">Počet osob</option>
+            <option>1 osoba</option>
+            <option>2 osoby</option>
+            <option>3 osoby</option>
+            <option>4 osoby</option>
+            <option>5 a více</option>
+        </select>
+
+        <textarea name="poznamka" rows="4" placeholder="Poznámka"></textarea>
+
+        <button type="submit">Odeslat rezervaci</button>
+    </form>
+</section>
+
+<!-- O NÁS -->
+<section id="onas" class="section">
+    <h2>O nás</h2>
+    <p>
+        Jsme malá a útulná kavárna, která nabízí kreativní zábavu a možnost vytvořit si
+        vlastní plecháček jako krásnou památku na společně strávený čas.
+    </p>
+</section>
+
+<!-- OTEVÍRACÍ DOBA -->
+<section id="doba" class="section dark">
+    <h2>Otevírací doba</h2>
+    <p>Pondělí – Čtvrtek: <strong>9:00 – 18:00</strong></p>
+    <p>Pátek – Sobota: <strong>9:00 – 21:00</strong></p>
+    <p>Neděle: <strong>10:00 – 18:00</strong></p>
+</section>
+
+<!-- KONTAKT + MAPA -->
+<section id="kontakt" class="section">
+    <h2>Kontakt</h2>
+    <p>Email: <strong>jakubreznik1@seznam.cz</strong></p>
+    <p>Telefon: <strong>607 780 025</strong></p>
+    <p>Adresa: <strong>Česko, Pardubický kraj · okres Svitavy · Svitavy</strong></p>
+
+    <br>
+
+    <iframe 
+        src="https://www.google.com/maps?q=49.756207,16.468899&z=15&output=embed"
+        width="100%"
+        height="350"
+        style="border:0; border-radius: 10px;"
+        allowfullscreen=""
+        loading="lazy">
+    </iframe>
+</section>
+
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('menu');
+
+    menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
+</script>
+
+</body>
+</html>
